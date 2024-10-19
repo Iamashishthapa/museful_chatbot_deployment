@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Uvicorn FastAPI",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "main:app",        // The app instance to run (main.py should define this)
+          "--host", "0.0.0.0",
+          "--port", "9001",
+          "--reload"
+        ],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/chatbot_api",
+          "ENV_FILE": "${workspaceFolder}/chatbot_api/.env"
+        },
+        "jinja": true
+      }
+    ]
+  }
+  

@@ -1,0 +1,15 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
+
+WORKDIR /chatbot_api
+
+COPY ./chatbot_api/requirements.txt /chatbot_api/requirements.txt
+
+RUN pip install -r requirements.txt 
+
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+
+COPY ./chatbot_api /chatbot_api
+
+# CMD ["uvicorn", "main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "9001", "--reload"]
+
+CMD ["uvicorn", "main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "9001", "--ssl-keyfile", "/chatbot_api/ssl/private_key.pem", "--ssl-certfile", "/chatbot_api/ssl/certificate.pem", "--ssl-ca-certs", "/chatbot_api/ssl/ca_chain.pem", "--reload"]

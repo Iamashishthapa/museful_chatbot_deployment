@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./chatbot_api/Dockerfile.fastapi
+    image: chatbot_fastapi
+    ports:
+      - "9001:9001"
+    restart: always
+    volumes:
+      - ./chatbot_api:/chatbot_api
